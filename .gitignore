@@ -1,0 +1,44 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Logs
+*.log
+logs/
+
+# Downloaded and extracted files
+downloaded/
+extracted_document_images/
+
+# Environment and credentials
+.env
+credentials.json
+token.json
+
+# Google Drive specific
+google_drive_data/
+personal_work/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# AWS
+aws.sh
+
+# IDE specific files
+.idea/
+.vscode/
+
+# Temporary files
+*.tmp
+temp_*/

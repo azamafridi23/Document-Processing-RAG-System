@@ -1,0 +1,137 @@
+# =============================================================================
+# Document RAG System - Docker Ignore File
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# SECURITY: Credential and Token Files (CRITICAL - NEVER include in image)
+# -----------------------------------------------------------------------------
+credentials*.json
+token*.json
+.env*
+
+# -----------------------------------------------------------------------------
+# DEVELOPMENT & VERSION CONTROL
+# -----------------------------------------------------------------------------
+.git/
+.gitignore
+.dockerignore
+README.md
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+*.tmp
+
+# -----------------------------------------------------------------------------
+# PYTHON CACHE & BUILD FILES
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# -----------------------------------------------------------------------------
+# VIRTUAL ENVIRONMENTS & POETRY
+# -----------------------------------------------------------------------------
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# -----------------------------------------------------------------------------
+# JUPYTER NOTEBOOKS & DATA SCIENCE
+# -----------------------------------------------------------------------------
+*.ipynb
+.ipynb_checkpoints/
+
+# -----------------------------------------------------------------------------
+# LOGS & TEMPORARY FILES
+# -----------------------------------------------------------------------------
+*.log
+logs/
+temp/
+tmp/
+
+# -----------------------------------------------------------------------------
+# CELERY SPECIFIC
+# -----------------------------------------------------------------------------
+celerybeat-schedule
+celerybeat.pid
+
+# -----------------------------------------------------------------------------
+# APPLICATION SPECIFIC TEMPORARY & CACHE DIRECTORIES
+# -----------------------------------------------------------------------------
+# Extracted document images (runtime generated)
+extracted_document_images/
+
+# Google Drive temporary processing files
+app/data_ingestion/google_drive_files/
+app/data_ingestion/google_drive/temp_downloaded_files/
+app/data_ingestion/google_drive/textual_documents/
+app/data_ingestion/google_drive/files_with_images/
+app/data_ingestion/google_drive/temp_extracted_images/
+app/data_ingestion/google_drive/file_id_to_local_path.json
+
+# Personal work directories (development artifacts)
+app/personal_work/
+downloaded/
+
+# -----------------------------------------------------------------------------
+# TESTING & COVERAGE
+# -----------------------------------------------------------------------------
+.tox/
+.coverage
+.pytest_cache/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# -----------------------------------------------------------------------------
+# DOCKER RELATED (avoid recursive Docker builds)
+# -----------------------------------------------------------------------------
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# -----------------------------------------------------------------------------
+# SCRIPTS & DEPLOYMENT (keep only essential ones)
+# -----------------------------------------------------------------------------
+scripts/
+docker/
+
+# -----------------------------------------------------------------------------
+# DOCUMENTATION & REPORTS (not needed in runtime)
+# -----------------------------------------------------------------------------
+docs/
+*.md
+app/reports/
