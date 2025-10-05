@@ -1,6 +1,6 @@
 # Document Processing RAG System
 
-A document processing and retrieval system built with FastAPI and LangChain, featuring semantic search capabilities and multiple interfaces for interaction.
+A production-ready document processing and retrieval system built with FastAPI and LangChain, featuring automated ingestion into PostgreSQL `pgvector`, agentic RAG for Q&A and summarization, and multi-channel interfaces (API, Streamlit, SMS, Email).
 
 ## Features
 
@@ -9,6 +9,8 @@ A document processing and retrieval system built with FastAPI and LangChain, fea
 - **Multiple Interfaces**: API, SMS (via Twilio), Email, and Streamlit UI
 - **Asynchronous Processing**: Celery for task scheduling and background processing
 - **Cloud Integration**: AWS S3 for storage and Google Drive for document retrieval
+ - **Auto Data Ingestion to pgvector**: Scheduled pipelines fetch from Google Drive and Gmail, extract text and images, generate embeddings, and upsert them into `pgvector` automatically
+ - **AI Agent Capabilities**: Tool-using RAG agent for chat, document Q&A, summarization, and workflow automation across API/Streamlit/SMS/Email
 
 ## Project Structure
 
