@@ -33,6 +33,93 @@ A production-ready document processing and retrieval system built with FastAPI a
 └── supervisord.conf          # Process management configuration
 ```
 
+## Architecture
+
+```mermaid
+flowchart TD
+  %% ===== INTERFACES =====
+  subgraph Interfaces["🧭 Interfaces"]
+    A1[REST API<br/>FastAPI /docs]
+    A2[Streamlit UI]
+    A3[Twilio SMS]
+    A4[Gmail Auto-Reply]
+  end
+
+  %% ===== APPLICATION =====
+  subgraph App["⚙️ Application Layer"]
+    B1[FastAPI App<br/>main.py]
+    B2[Agent &#40;LangChain + OpenAI&#41;]
+    B3[Celery Worker]
+    B4[Celery Beat]
+    B5[Redis Broker]
+  end
+
+  %% ===== DATA STORES =====
+  subgraph DataStores["💾 Data Stores"]
+    C1[(PostgreSQL<br/>pgvector)]
+    C2[(AWS S3<br/>Extracted Images)]
+  end
+
+  %% ===== EXTERNAL SERVICES =====
+  subgraph External["🌐 External Services"]
+    D1[Google Drive]
+    D2[Gmail API]
+    D3[Twilio]
+    D4[OpenAI API]
+  end
+
+  %% ===== CONNECTIONS =====
+  A1 --> B1
+  A2 --> B1
+  A3 --> B1
+  A4 --> B1
+
+  B1 <--> B2
+  B1 --> B3
+  B4 -. Schedules .-> B3
+  B3 <--> B5
+
+  B2 <--> C1
+  B3 <--> C1
+  B3 --> C2
+
+  B3 <--> D1
+  B1 <--> D2
+  B1 <--> D3
+  B2 <--> D4
+
+  %% ===== STYLES =====
+  classDef interface fill:#e7f3fe,stroke:#4a90e2,stroke-width:1px,color:#1a1a1a;
+  classDef app fill:#fdf5e6,stroke:#f5a623,stroke-width:1px,color:#1a1a1a;
+  classDef store fill:#eaf5ff,stroke:#6aa1d8,stroke-width:1px,color:#1a1a1a;
+  classDef svc fill:#f6ffea,stroke:#78b36a,stroke-width:1px,color:#1a1a1a;
+
+  class A1,A2,A3,A4 interface;
+  class B1,B2,B3,B4,B5 app;
+  class C1,C2 store;
+  class D1,D2,D3,D4 svc;
+```
+
+### Ingestion pipeline (high level)
+
+```mermaid
+sequenceDiagram
+  participant Beat as Celery Beat
+  participant Worker as Celery Worker
+  participant Drive as Google Drive
+  participant S3 as AWS S3
+  participant PG as Postgres/pgvector
+
+  Beat->>Worker: Trigger run_ingestion_pipeline
+  Worker->>Drive: List files, detect new/updated
+  Worker->>Drive: Download/export files
+  alt File has images
+    Worker->>S3: Upload extracted images
+  end
+  Worker->>PG: Embed text/chunks + metadata
+  Worker->>PG: Update file_metadata.processed_at
+```
+
 ## Installation
 
 1. **Clone the repository:**
