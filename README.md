@@ -38,34 +38,34 @@ A production-ready document processing and retrieval system built with FastAPI a
 ```mermaid
 flowchart TD
   %% ===== INTERFACES =====
-  subgraph Interfaces["🧭 Interfaces"]
-    A1[REST API<br/>FastAPI /docs]
-    A2[Streamlit UI]
-    A3[Twilio SMS]
-    A4[Gmail Auto-Reply]
+  subgraph Interfaces["Interfaces"]
+    A1["REST API<br/>FastAPI /docs"]
+    A2["Streamlit UI"]
+    A3["Twilio SMS"]
+    A4["Gmail Auto-Reply"]
   end
 
   %% ===== APPLICATION =====
-  subgraph App["⚙️ Application Layer"]
-    B1[FastAPI App<br/>main.py]
-    B2[Agent &#40;LangChain + OpenAI&#41;]
-    B3[Celery Worker]
-    B4[Celery Beat]
-    B5[Redis Broker]
+  subgraph App["Application Layer"]
+    B1["FastAPI App<br/>main.py"]
+    B2["Agent<br/>LangChain + OpenAI"]
+    B3["Celery Worker"]
+    B4["Celery Beat"]
+    B5["Redis Broker"]
   end
 
   %% ===== DATA STORES =====
-  subgraph DataStores["💾 Data Stores"]
-    C1[(PostgreSQL<br/>pgvector)]
-    C2[(AWS S3<br/>Extracted Images)]
+  subgraph DataStores["Data Stores"]
+    C1[("PostgreSQL<br/>pgvector")]
+    C2[("AWS S3<br/>Extracted Images")]
   end
 
   %% ===== EXTERNAL SERVICES =====
-  subgraph External["🌐 External Services"]
-    D1[Google Drive]
-    D2[Gmail API]
-    D3[Twilio]
-    D4[OpenAI API]
+  subgraph External["External Services"]
+    D1["Google Drive"]
+    D2["Gmail API"]
+    D3["Twilio"]
+    D4["OpenAI API"]
   end
 
   %% ===== CONNECTIONS =====
@@ -76,7 +76,7 @@ flowchart TD
 
   B1 <--> B2
   B1 --> B3
-  B4 -. Schedules .-> B3
+  B4 -.-> B3
   B3 <--> B5
 
   B2 <--> C1
